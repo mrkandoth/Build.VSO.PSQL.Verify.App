@@ -1,0 +1,15 @@
+{
+  "name": "vso-psql-verify",
+  "version": "1.0.0",
+  "description": "A simple NodeJS app to verify the Kubernetes Dynamic Secrets using VSO for PostgreSQL database",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.11.3"
+  }
+}
