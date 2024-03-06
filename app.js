@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 
-// Function to connect to the PostgreSQL database and perform actions
-async function connectAndPerformActions() {
+// Function to create a PostgreSQL client
+function createClient() {
   const dbHost = process.env.DB_HOST;
   const dbName = process.env.DB_NAME;
   const dbPort = process.env.DB_PORT;
@@ -11,10 +11,15 @@ async function connectAndPerformActions() {
   // Create a PostgreSQL connection URL
   const connectionString = `postgresql://${dbUsername}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
 
-  // Create a PostgreSQL client
-  const client = new Client({
+  // Create a new PostgreSQL client
+  return new Client({
     connectionString: connectionString,
   });
+}
+
+// Function to connect to the PostgreSQL database and perform actions
+async function connectAndPerformActions() {
+  const client = createClient();
 
   try {
     // Connect to the PostgreSQL database
@@ -33,9 +38,9 @@ async function connectAndPerformActions() {
   }
 }
 
-// Function to run the connection and actions loop every 1 minutes
+// Function to run the connection and actions loop every 1 minute
 function runLoop() {
-  const interval = 1 * 60 * 1000; // 1 minutes in milliseconds
+  const interval = 1 * 60 * 1000; // 1 minute in milliseconds
 
   setInterval(async () => {
     await connectAndPerformActions();
