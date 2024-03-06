@@ -2,6 +2,9 @@ const { Client } = require('pg');
 
 // Function to connect to the PostgreSQL database and perform actions
 async function connectAndPerformActions() {
+  const dbHost = process.env.DB_HOST;
+  const dbName = process.env.DB_NAME;
+  const dbPort = process.env.DB_PORT;
   const dbUsername = process.env.DB_USERNAME;
   const dbPassword = process.env.DB_PASSWORD;
 
@@ -9,9 +12,9 @@ async function connectAndPerformActions() {
   const client = new Client({
     user: dbUsername,
     password: dbPassword,
-    host: '127.0.0.1', // Replace with your actual database host
-    database: 'postgres', // Replace with your actual database name
-    port: 5432, // Replace with your actual database port
+    host: dbHost, // Replace with your actual database host
+    database: dbName, // Replace with your actual database name
+    port: dbPort, // Replace with your actual database port
   });
 
   try {
@@ -31,9 +34,9 @@ async function connectAndPerformActions() {
   }
 }
 
-// Function to run the connection and actions loop every 5 minutes
+// Function to run the connection and actions loop every 1 minutes
 function runLoop() {
-  const interval = 5 * 60 * 1000; // 5 minutes in milliseconds
+  const interval = 1 * 60 * 1000; // 1 minutes in milliseconds
 
   setInterval(async () => {
     await connectAndPerformActions();
