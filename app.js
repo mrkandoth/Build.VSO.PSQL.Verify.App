@@ -24,7 +24,7 @@ async function connectAndPerformActions() {
   try {
     // Connect to the PostgreSQL database
     await client.connect();
-    console.log('Connected to PostgreSQL database');
+    console.log(`Connected to PostgreSQL database as user: ${client.connectionParameters.user}`);
 
     // Execute a simple query to get current date & time
     const result = await client.query('SELECT NOW() as current_time');
