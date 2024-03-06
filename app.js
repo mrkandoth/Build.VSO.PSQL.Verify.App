@@ -8,13 +8,12 @@ async function connectAndPerformActions() {
   const dbUsername = process.env.DB_USERNAME;
   const dbPassword = process.env.DB_PASSWORD;
 
+  // Create a PostgreSQL connection URL
+  const connectionString = `postgresql://${dbUsername}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
+
   // Create a PostgreSQL client
   const client = new Client({
-    user: dbUsername,
-    password: dbPassword,
-    host: dbHost, // Replace with your actual database host
-    database: dbName, // Replace with your actual database name
-    port: dbPort, // Replace with your actual database port
+    connectionString: connectionString,
   });
 
   try {
