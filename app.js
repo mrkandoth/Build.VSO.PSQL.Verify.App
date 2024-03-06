@@ -8,12 +8,13 @@ function createClient() {
   const dbUsername = process.env.DB_USERNAME;
   const dbPassword = process.env.DB_PASSWORD;
 
-  // Create a PostgreSQL connection URL
-  const connectionString = `postgresql://${dbUsername}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
-
   // Create a new PostgreSQL client
   return new Client({
-    connectionString: connectionString,
+    user: dbUsername,
+    password: dbPassword,
+    host: dbHost, // Replace with your actual database host
+    database: dbName, // Replace with your actual database name
+    port: dbPort, // Replace with your actual database port
   });
 }
 
